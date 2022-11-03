@@ -39,6 +39,20 @@ public class Application {
             StudentIdCard studentIdCard = new StudentIdCard("123456789", student);
 
             student.setStudentIdCard(studentIdCard);
+
+            student.addEnrolment(
+                    new Enrolment(
+                            new EnrolmentId(1L, 1L),
+                            student,
+                            new Course("Computer Science", "compsci"),
+                            LocalDateTime.now()));
+            student.addEnrolment(
+                    new Enrolment(
+                            new EnrolmentId(1L, 1L),
+                            student,
+                            new Course("Maths", "maths"),
+                            LocalDateTime.now()));
+
             studentRepository.save(student);
 
             studentRepository.findById(1L).ifPresent(s -> {

@@ -47,6 +47,9 @@ public class Student {
             CascadeType.REMOVE })
     private List<Book> books = new ArrayList<>();
 
+    @OneToMany(mappedBy = "student", cascade = { CascadeType.PERSIST, CascadeType.REMOVE })
+    public List<Enrolment> enrolments = new ArrayList<>();
+
     public Student(String firstName, String lastName, String email, Integer age) {
         this.firstName = firstName;
         this.lastName = lastName;
@@ -69,6 +72,20 @@ public class Student {
             this.books.remove(book);
             book.setStudent(null);
         }
+    }
+
+    public List<Enrolment> getEnrolments() {
+        return enrolments;
+    }
+
+    public void addEnrolment(Enrolment enrolment) {
+        if (!enrolments.contains(enrolment)) {
+            enrolments.add(enrolment);
+        }
+    }
+
+    public void removeEnrolment(Enrolment enrolment) {
+        enrolments.remove(enrolment);
     }
 
     @Override
